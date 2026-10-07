@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F6F3FF"><meta name="color-scheme" content="light only">
+<meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="NutriTrack"><meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" href="icon-192.png">
+<title>NutriTrack</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap">
+<style>
+:root{color-scheme:light;--bg:#F6F3FF;--card:#fff;--ink:#1E1537;--mute:#756C8C;--line:#E6DFF7;--p:#6D3FE0;--p2:#9B7BF0;--soft:#EDE6FD;--ok:#1F9D6B;--warn:#E8890C;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(700px 420px at 88% -6%,rgba(155,123,240,.24),transparent 70%),radial-gradient(600px 420px at -10% 4%,rgba(255,170,210,.26),transparent 70%),var(--bg);background-attachment:fixed;color:var(--ink);font:400 15px/1.5 "Plus Jakarta Sans",system-ui,sans-serif}
+#app{max-width:520px;margin:0 auto;min-height:100vh;position:relative}
+.page{padding:18px 16px 96px}.pad{padding:24px 18px}
+h1{font-size:26px;font-weight:800;margin:0 0 4px;letter-spacing:-.02em}h2{font-size:17px;font-weight:800;margin:0 0 10px}h3{font-size:15px;margin:0}
+.m{color:var(--mute);font-size:13px;margin:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:16px;margin:12px 0}
+.hero{background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;border:0}.hero .m{color:#ECE3FF}
+.row{display:flex;gap:10px;align-items:center}.row>.g{flex:1;min-width:0}.sp{justify-content:space-between}
+.btn{border:0;border-radius:14px;padding:13px 16px;font:800 15px inherit;font-family:inherit;background:var(--p);color:#fff;cursor:pointer;width:100%;margin-top:12px}
+.btn.s{background:var(--soft);color:var(--p)}.btn.sm{width:auto;padding:8px 14px;margin:0;font-size:13px}.btn.o{background:none;border:1px solid var(--line);color:var(--ink)}
+label{display:block;font-size:13px;color:var(--mute);margin:12px 0 4px}
+input,select{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:11px 12px}
+input[type=checkbox]{width:auto}
+:focus-visible{outline:2px solid var(--p);outline-offset:2px}
+.err{color:#D1334A;font-size:13px;margin-top:8px;min-height:18px}
+.link{background:none;border:0;color:var(--p);font:600 13px inherit;font-family:inherit;cursor:pointer;padding:0}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;display:flex;background:var(--card);border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px))}
+nav button{flex:1;border:0;background:none;color:var(--mute);font:600 11px inherit;font-family:inherit;padding:6px 0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px}
+nav button span{font-size:20px}nav button.on{color:var(--p)}
+.rg{position:relative;flex:none}.rc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.rc b{font-size:20px;line-height:1.1}.rc small{font-size:11px;color:var(--mute)}.hero .rc small{color:#ECE3FF}
+.arc{animation:d .9s ease-out}@keyframes d{from{stroke-dashoffset:var(--C)}}
+@media (prefers-reduced-motion:reduce){.arc{animation:none}}
+.qa{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.qa button{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:16px;padding:10px 2px;font:600 12px inherit;font-family:inherit;cursor:pointer}
+.qa span{display:block;font-size:20px}
+.tags{display:flex;gap:8px;flex-wrap:wrap}.tag{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px;border-radius:99px;font:600 13px inherit;font-family:inherit;cursor:pointer}.tag.on{background:var(--p);color:#fff;border-color:var(--p)}
+.it{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-top:1px solid var(--line)}.it:first-of-type{border:0}
+.x{border:0;background:none;color:var(--mute);font-size:18px;cursor:pointer}
+.lock{text-align:center;padding:26px 16px}.lock div{font-size:34px}
+.pill{display:inline-block;background:var(--soft);color:var(--p);border-radius:99px;padding:3px 10px;font-size:12px;font-weight:800}
+.ban{background:var(--soft);border-radius:16px;padding:12px 14px;display:flex;gap:10px;align-items:center;justify-content:space-between;margin:12px 0;font-size:13px}
+.plan{border:2px solid var(--line);border-radius:20px;padding:16px;margin:12px 0}.plan.best{border-color:var(--p)}
+.plan ul{margin:8px 0 0;padding-left:18px;color:var(--mute);font-size:13px}
+.sheet{position:fixed;inset:0;background:rgba(20,10,40,.5);display:flex;align-items:flex-end;justify-content:center;z-index:5}
+.sheet>div{background:var(--card);width:100%;max-width:520px;max-height:88vh;overflow:auto;border-radius:26px 26px 0 0;padding:18px 16px calc(24px + env(safe-area-inset-bottom,0px))}
+#toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:99px;font-size:13px;opacity:0;transition:.25s;z-index:9;pointer-events:none;max-width:90%}
+#toast.on{opacity:1;transform:translateX(-50%)}
+.logo{width:56px;height:56px;border-radius:18px;background:linear-gradient(135deg,var(--p),var(--p2));display:grid;place-items:center;font-size:28px;margin-bottom:14px}
+.ov{overflow-x:auto}
+.q{background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(135deg,var(--p),#F06EAA) border-box;border:1.5px solid transparent}
+body{overflow-x:hidden;-webkit-tap-highlight-color:transparent}input,select{font-size:16px}
+</style></head><body>
+<div id="app"></div><div id="toast" role="status"></div>
+<script>
+const $=s=>document.querySelector(s),K='nutritrack_v1',DAY=864e5;
+let DB={users:{},session:null,remember:false};
+try{DB={...DB,...JSON.parse(localStorage.getItem(K))}}catch(e){}
+const sv=()=>{try{localStorage.setItem(K,JSON.stringify({...DB,session:DB.remember?DB.session:null}))}catch(e){}};
+const U=()=>DB.users[DB.session];
+const dk=o=>new Date(Date.now()+o*DAY).toLocaleDateString('en-CA');
+const hp=s=>{let h=5381;for(const c of s)h=(h*33)^c.charCodeAt(0);return String(h>>>0)};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('on'),2400)};
+const ui={auth:'login',tab:'home',screen:'',sheet:null,meal:'Breakfast',range:7,onb:{goal:'Lose Weight'}};
+const FOODS=[['Oatmeal with banana','1 bowl',320,9,58,6],['Scrambled eggs (2)','2 eggs',180,12,2,14],['Whole-wheat toast','2 slices',160,8,28,2],['Greek yogurt','170 g',130,17,6,4],['Grilled chicken breast','150 g',250,46,0,5],['Brown rice','1 cup',215,5,45,2],['Chicken adobo','1 serving',380,32,8,24],['Garden salad','1 bowl',90,3,10,5],['Salmon fillet','150 g',310,34,0,18],['Apple','1 medium',95,0,25,0],['Almonds','30 g',170,6,6,15],['Protein shake','1 scoop',150,25,6,3]];
+const EX={Walking:4,Running:10,Cycling:8,Swimming:9,'Strength training':6,Yoga:3},EXI={Walking:'🚶',Running:'🏃',Cycling:'🚴',Swimming:'🏊','Strength training':'🏋️',Yoga:'🧘'};
+const MEALS=['Breakfast','Lunch','Dinner','Snacks'];
+
+/* subscription */
+function st(){const s=U().sub,n=Date.now();if((s.status==='trial'||s.status==='cancelled')&&n>s.end){s.status='expired';sv()}return s.status}
+const prem=()=>['trial','active','cancelled'].includes(st());
+const left=()=>Math.max(0,Math.ceil((U().sub.end-Date.now())/DAY));
+const fd=t=>new Date(t).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'});
+/* data */
+const day=d=>U().log[d]||(U().log[d]={food:[],water:0,ex:[]});
+const tot=d=>day(d).food.reduce((a,f)=>({k:a.k+f.k,p:a.p+f.p,c:a.c+f.c,f:a.f+f.f}),{k:0,p:0,c:0,f:0});
+function target(p){const b=10*p.w+6.25*p.h-5*p.age+(p.sex==='Male'?5:-161);let t=b*p.act;if(p.goal==='Lose Weight')t-=500;if(p.goal==='Gain Weight')t+=300;return Math.round(Math.max(t,p.sex==='Male'?1500:1200))}
+const burned=d=>day(d).ex.reduce((a,e)=>a+e.k,0);
+const lastW=()=>{const w=U().weights;return w.length?w[w.length-1].w:U().profile.w};
+
+const QUOTES=["Small steps still move you forward.","You don't have to be perfect, just consistent.","Fuel your body like you respect it.","Today's effort is tomorrow's energy.","Progress is quiet. Keep showing up.","One healthy choice at a time.","Strong starts with the next meal, the next walk, the next breath.","Your future self is cheering for you.","Slow progress is still progress.","Drink the water. Take the walk. Be proud of it.","You're building habits, not chasing a number.","A good day is made of small wins.","Rest is part of the plan, not a break from it.","Be kind to yourself and keep going.","Every log is a promise you kept.","Eat well, move often, sleep deeply.","Discipline is just caring about tomorrow.","Your body is on your team.","Don't wait for motivation. Start, and it follows.","Healthy is a direction, not a finish line.","Missed a day? Begin again right now.","Consistency beats intensity every time.","You're stronger than the excuse.","Celebrate how far you've come.","Make today a little better than yesterday.","Energy grows where attention goes.","Choose the meal your future self will thank you for.","Move because you can, not because you must.","The best workout is the one you actually do.","Trust the process and give it time.","Your goals are worth the effort."];
+function quote(){const d=new Date(),i=Math.floor((d-new Date(d.getFullYear(),0,0))/DAY)%QUOTES.length;return `<div class="card q"><p class="m" style="letter-spacing:.14em;text-transform:uppercase;font-size:11px">✨ Today's boost</p><p style="font-size:17px;font-weight:600;margin:6px 0 0">\u201c${QUOTES[i]}\u201d</p></div>`}
+/* components */
+function ring(p,c,sz,t,sub,w=10){const r=(sz-w)/2,C=2*Math.PI*r;return `<div class="rg" style="width:${sz}px;height:${sz}px"><svg width="${sz}" height="${sz}" style="transform:rotate(-90deg)" aria-hidden="true"><circle cx="${sz/2}" cy="${sz/2}" r="${r}" fill="none" stroke="var(--soft)" stroke-width="${w}"/><circle class="arc" cx="${sz/2}" cy="${sz/2}" r="${r}" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C*(1-Math.min(1,Math.max(0,p)))}" style="--C:${C}"/></svg><div class="rc"><b>${t}</b><small>${sub}</small></div></div>`}
+function bars(v,l,col,goal){const W=460,H=150,m=Math.max(...v,goal||0,1),bw=W/v.length;return `<svg viewBox="0 0 ${W} ${H+20}" width="100%" role="img">${goal?`<line x1="0" x2="${W}" y1="${H-goal/m*H}" y2="${H-goal/m*H}" stroke="var(--mute)" stroke-dasharray="4 4"/>`:''}${v.map((x,i)=>`<rect x="${i*bw+bw*.15}" y="${H-x/m*H}" width="${bw*.7}" height="${x/m*H}" rx="4" fill="${col}"/>`).join('')}${l.map((x,i)=>i%Math.ceil(v.length/7)?'':`<text x="${i*bw+bw/2}" y="${H+14}" text-anchor="middle" font-size="10" fill="var(--mute)">${x}</text>`).join('')}</svg>`}
+function line(pts,col){if(pts.length<2)return '<p class="m">Log two weigh-ins to see a chart.</p>';const W=460,H=150,v=pts.map(p=>p.w),mn=Math.min(...v)-1,mx=Math.max(...v)+1,X=i=>10+i/(pts.length-1)*(W-20),Y=x=>H-(x-mn)/(mx-mn)*H;return `<svg viewBox="0 0 ${W} ${H+20}" width="100%" role="img"><path d="${pts.map((p,i)=>(i?'L':'M')+X(i)+' '+Y(p.w)).join('')}" fill="none" stroke="${col}" stroke-width="3" stroke-linejoin="round"/>${pts.map((p,i)=>`<circle cx="${X(i)}" cy="${Y(p.w)}" r="3.5" fill="${col}"/>`).join('')}<text x="0" y="${H+14}" font-size="10" fill="var(--mute)">${v[0]} kg</text><text x="${W}" y="${H+14}" text-anchor="end" font-size="10" fill="var(--mute)">${v[v.length-1]} kg</text></svg>`}
+const lockV=t=>`<div class="card lock"><div>🔒</div><h2>${t} is Premium</h2><p class="m">Start or upgrade your plan to unlock it.</p><button class="btn" onclick="A.sub()">See plans</button></div>`;
+const nav=()=>`<nav>${[['home','🏠','Home'],['food','🍎','Food'],['ex','🏃','Exercise'],['prog','📈','Progress'],['me','👤','Profile']].map(t=>`<button class="${ui.tab===t[0]?'on':''}" onclick="A.tab('${t[0]}')"><span>${t[1]}</span>${t[2]}</button>`).join('')}</nav>`;
+
+/* auth */
+function authV(){const a=ui.auth,L=a==='login',S=a==='signup';
+return `<div class="pad"><img class="logo" src="icon-192.png" alt="NutriTrack" style="width:72px;height:72px;border-radius:22px;display:block;background:none"><h1>${S?'Create your account':a==='forgot'?'Reset password':'Welcome to NutriTrack'}</h1><p class="m">${S?'30 days of Premium, free.':a==='forgot'?'Enter your email and a new password. In production this sends an email link.':'Log in to continue your journey.'}</p>
+${S?'<label for="nm">Full name</label><input id="nm" autocomplete="name">':''}
+<label for="em">Email address</label><input id="em" type="email" autocomplete="email">
+<label for="pw">${a==='forgot'?'New password':'Password'}</label><div class="row"><input id="pw" type="password" autocomplete="${L?'current-password':'new-password'}"><button class="btn s sm" onclick="const i=$('#pw');i.type=i.type==='password'?'text':'password'">Show</button></div>
+${S||a==='forgot'?'<p class="m" style="margin-top:6px">8+ characters, with an uppercase letter and a number.</p>':''}
+${S?'<label for="pw2">Confirm password</label><input id="pw2" type="password" autocomplete="new-password"><label class="row" style="margin-top:14px"><input type="checkbox" id="tm"><span>I agree to the <button class="link" onclick="toast(\'Terms of Service (demo)\')">Terms</button> and <button class="link" onclick="toast(\'Privacy Policy (demo)\')">Privacy Policy</button></span></label>':''}
+${L?'<div class="row sp" style="margin-top:12px"><label class="row" style="margin:0"><input type="checkbox" id="rm"> Remember me</label><button class="link" onclick="ui.auth=\'forgot\';R()">Forgot password?</button></div>':''}
+<div class="err" id="err" role="alert"></div>
+<button class="btn" onclick="A.auth()">${S?'Create Account':a==='forgot'?'Reset password':'Log in'}</button>
+${L||S?'<button class="btn o" onclick="toast(\'Google sign-in needs OAuth keys on a real backend\')">Continue with Google</button>':''}
+<p class="m" style="text-align:center;margin-top:16px">${L?'New here? <button class="link" onclick="ui.auth=\'signup\';R()">Create account</button>':'<button class="link" onclick="ui.auth=\'login\';R()">Back to log in</button>'}</p>
+<p class="m" style="text-align:center;margin-top:18px">Prototype: accounts live in this browser only.</p></div>`}
+function onbV(){const o=ui.onb;return `<div class="pad"><h1>Tell us about you</h1><p class="m">We use this to estimate your daily calories. Estimates only, not medical advice.</p>
+<div class="row"><div class="g"><label for="o1">Age</label><input id="o1" type="number" min="18" max="90"></div><div class="g"><label for="o2">Gender</label><select id="o2"><option>Female</option><option>Male</option></select></div></div>
+<div class="row"><div class="g"><label for="o3">Height (cm)</label><input id="o3" type="number"></div><div class="g"><label for="o4">Weight (kg)</label><input id="o4" type="number" step="0.1"></div></div>
+<label for="o5">Target weight (kg)</label><input id="o5" type="number" step="0.1">
+<label for="o6">Activity level</label><select id="o6"><option value="1.2">Mostly sitting</option><option value="1.375" selected>Light (1-3 days/week)</option><option value="1.55">Moderate (3-5 days)</option><option value="1.725">Very active</option></select>
+<label>Goal</label><div class="tags">${['Lose Weight','Maintain Weight','Gain Weight'].map(g=>`<button class="tag ${o.goal===g?'on':''}" onclick="ui.onb.goal='${g}';A.keep()">${g}</button>`).join('')}</div>
+<div class="err" id="err" role="alert"></div><button class="btn" onclick="A.onb()">Calculate my plan</button></div>`}
+function welV(){const u=U(),s=u.sub;return `<div class="pad"><div class="card hero" style="text-align:center;padding:26px 18px"><h1>Your 30-Day Free Trial Starts Today 🎉</h1><p class="m">Your estimated target: <b>${target(u.profile)} kcal/day</b>. This is an estimate, not medical advice.</p></div>
+<div class="card"><div class="row sp"><span class="m">Trial starts</span><b>${fd(s.start)}</b></div><div class="row sp" style="margin-top:8px"><span class="m">Trial ends</span><b>${fd(s.end)}</b></div><div class="row sp" style="margin-top:8px"><span class="m">Days remaining</span><b>${left()}</b></div></div>
+<div class="card"><h2>Unlocked during your trial</h2><p class="m">Advanced analytics · Macro tracking · Meal suggestions · Exercise tracking · Weight charts · Weekly and monthly reports · Custom foods · Full history · Wellness insights</p></div>
+<button class="btn" onclick="U().welcomed=1;sv();R()">Start tracking</button></div>`}
+
+/* tabs */
+function home(){const u=U(),p=u.profile,d=dk(0),t=tot(d),tg=target(p),b=burned(d),rem=tg-t.k+b,w=day(d).water,s=u.sub;
+const th=[14,7,3,1].filter(x=>left()<=x&&!u.seen.includes(x)).pop();
+const ban=s.status==='trial'&&th?`<div class="ban"><span>⏳ ${left()} day${left()>1?'s':''} left in your Premium trial.</span><span class="row"><button class="link" onclick="A.sub()">Plans</button><button class="x" aria-label="Dismiss" onclick="A.dis(${th})">×</button></span></div>`:s.status==='expired'?`<div class="ban"><span>Your trial ended. Premium features are locked.</span><button class="link" onclick="A.sub()">Subscribe</button></div>`:'';
+const mac=(l,v,g,c)=>prem()?`<div style="text-align:center">${ring(v/g,c,72,Math.round(v)+'g',l,7)}</div>`:'';
+return `<h1>Hi, ${esc(u.name.split(' ')[0])} 👋</h1><p class="m">${new Date().toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'})}</p>${ban}${quote()}
+<div class="card hero"><div class="row sp"><div>${ring(t.k/(tg+b),'#fff',150,rem>=0?rem:-rem,rem>=0?'kcal left':'kcal over',12)}</div><div class="g" style="padding-left:6px"><p class="m">Target</p><b style="font-size:20px">${tg}</b><p class="m" style="margin-top:8px">Eaten</p><b style="font-size:20px">${t.k}</b><p class="m" style="margin-top:8px">Exercise</p><b style="font-size:20px">${prem()?'-'+b:'🔒'}</b></div></div></div>
+<div class="qa"><button onclick="A.add('food')"><span>🍽️</span>Add Food</button><button onclick="A.water(250)"><span>💧</span>Add Water</button><button onclick="A.go('ex')"><span>🏃</span>Exercise</button><button onclick="A.add('weight')"><span>⚖️</span>Weight</button></div>
+<div class="card"><h2>Macros</h2>${prem()?`<div class="row sp">${mac('Protein',t.p,tg*.25/4,'#6D3FE0')}${mac('Carbs',t.c,tg*.5/4,'#E8890C')}${mac('Fat',t.f,tg*.25/9,'#1F9D6B')}</div>`:'<p class="m">🔒 Macro tracking is Premium.</p>'}</div>
+<div class="row"><div class="card g" style="margin:12px 0"><h3>💧 Water</h3><p class="m">${w} / 2000 ml</p><div style="margin-top:8px;height:8px;background:var(--soft);border-radius:9px"><div style="height:8px;width:${Math.min(100,w/20)}%;background:#3B9BE8;border-radius:9px"></div></div></div>
+<div class="card g" style="margin:12px 0"><h3>⚖️ Weight</h3><p class="m">${lastW()} kg → ${p.tw} kg</p></div></div>`}
+function food(){const d=dk(0);return `<h1>Food</h1><p class="m">${tot(d).k} kcal today</p>${MEALS.map(m=>{const l=day(d).food.map((f,i)=>({...f,i})).filter(f=>f.m===m);return `<div class="card"><div class="row sp"><h2 style="margin:0">${m}</h2><button class="btn sm s" onclick="A.add('food','${m}')">+ Add</button></div>${l.length?l.map(f=>`<div class="it"><div><b>${esc(f.n)}</b><p class="m">${esc(f.s)}${prem()?` · P${f.p} C${f.c} F${f.f}`:''}</p></div><span class="row"><b>${f.k}</b><button class="x" aria-label="Remove" onclick="A.del(${f.i})">×</button></span></div>`).join(''):'<p class="m" style="margin-top:8px">Nothing logged yet.</p>'}</div>`}).join('')}`}
+function ex(){if(!prem())return '<h1>Exercise</h1>'+lockV('Exercise tracking');const l=day(dk(0)).ex;return `<h1>Exercise</h1><p class="m">${burned(dk(0))} kcal burned today</p><div class="card"><label for="et">Activity</label><select id="et" onchange="A.est()">${Object.keys(EX).map(k=>`<option>${k}</option>`).join('')}</select><label for="ed">Duration (minutes)</label><input id="ed" type="number" value="30" oninput="A.est()"><p class="m" id="ee" style="margin-top:8px"></p><button class="btn" onclick="A.exAdd()">Add exercise</button></div><div class="card"><h2>Today</h2>${l.length?l.map((e,i)=>`<div class="it"><span>${EXI[e.t]} ${e.t} · ${e.d} min</span><span class="row"><b>${e.k} kcal</b><button class="x" aria-label="Remove" onclick="A.delEx(${i})">×</button></span></div>`).join(''):'<p class="m">No workouts yet.</p>'}</div>`}
+function prog(){if(!prem())return '<h1>Progress</h1>'+lockV('Analytics and charts');const n=ui.range,ds=[...Array(n)].map((_,i)=>dk(i-n+1)),kc=ds.map(d=>tot(d).k),wt=ds.map(d=>day(d).water),exs=ds.map(burned),lb=ds.map(d=>d.slice(8)),av=a=>Math.round(a.reduce((x,y)=>x+y,0)/(a.filter(x=>x).length||1)),M=ds.reduce((a,d)=>{const t=tot(d);return{p:a.p+t.p,c:a.c+t.c,f:a.f+t.f}},{p:0,c:0,f:0}),logged=kc.filter(x=>x).length||1,ws=U().weights.slice(-n);
+return `<h1>Progress</h1><div class="tags" style="margin:8px 0"><button class="tag ${n===7?'on':''}" onclick="ui.range=7;R()">Weekly</button><button class="tag ${n===30?'on':''}" onclick="ui.range=30;R()">Monthly</button></div>
+<div class="card"><h2>Calories</h2><p class="m">Average ${av(kc)} kcal/day · target ${target(U().profile)}</p>${bars(kc,lb,'#6D3FE0',target(U().profile))}</div>
+<div class="card"><h2>Weight</h2>${line(ws,'#6D3FE0')}</div>
+<div class="card"><h2>Water</h2><p class="m">Average ${av(wt)} ml/day</p>${bars(wt,lb,'#3B9BE8',2000)}</div>
+<div class="card"><h2>Exercise</h2><p class="m">${exs.reduce((a,b)=>a+b,0)} kcal burned</p>${bars(exs,lb,'#1F9D6B')}</div>
+<div class="card"><h2>Average macros</h2><p class="m">Protein ${Math.round(M.p/logged)} g · Carbs ${Math.round(M.c/logged)} g · Fat ${Math.round(M.f/logged)} g per logged day</p></div>`}
+function me(){const u=U(),s=u.sub,p=u.profile,tl={trial:`Premium Trial · ${left()} days remaining`,active:'Premium active',cancelled:`Cancelled · access until ${fd(s.end)}`,expired:'Free plan · trial ended'}[st()];
+return `<h1>Profile</h1><div class="card"><h2>${esc(u.name)}</h2><p class="m">${esc(DB.session)}</p><p style="margin-top:10px"><span class="pill">${tl}</span></p></div>
+<div class="card"><h2>Health goals</h2><p class="m">${p.goal} · ${p.age} y · ${p.h} cm · ${lastW()} kg → ${p.tw} kg</p><p style="margin-top:6px"><b>${target(p)} kcal/day</b></p><p class="m">Estimates only, not medical advice.</p></div>
+<div class="card"><button class="btn s" style="margin:0" onclick="A.sub()">Manage Subscription</button>
+<label class="row"><input type="checkbox" ${u.set.notif?'checked':''} onchange="U().set.notif=this.checked;sv()"> Trial and goal reminders</label>
+<label class="row"><input type="checkbox" ${u.set.priv?'checked':''} onchange="U().set.priv=this.checked;sv()"> Share anonymous usage data</label>
+<div class="row" style="margin-top:12px"><button class="link" onclick="toast('Terms of Service (demo)')">Terms of Service</button><button class="link" onclick="toast('Privacy Policy (demo)')">Privacy Policy</button></div></div>
+<button class="btn o" onclick="A.out()">Log out</button><button class="btn o" style="color:#D1334A" onclick="A.delAcc()">Delete account</button>`}
+function subV(){const s=U().sub,S=st();return `<div class="page"><button class="link" onclick="ui.screen='';R()">← Back</button><h1 style="margin-top:8px">NutriTrack Premium</h1>
+<div class="card"><div class="row sp"><span class="m">Status</span><span class="pill">${S}</span></div>
+<div class="row sp" style="margin-top:8px"><span class="m">Plan</span><b>${s.plan||'Free trial'}</b></div>
+<div class="row sp" style="margin-top:8px"><span class="m">${S==='trial'?'Trial ends':S==='cancelled'?'Access until':'Period ends'}</span><b>${fd(s.end)}</b></div>
+${S==='active'?`<div class="row sp" style="margin-top:8px"><span class="m">Next billing</span><b>${fd(s.end)}</b></div>`:''}</div>
+<div class="plan"><div class="row sp"><h3>Monthly</h3><b>$9.99/mo</b></div><ul><li>Full calorie tracking and macros</li><li>Advanced analytics and charts</li><li>Personalized meal suggestions</li><li>Unlimited food entries</li><li>Weight, exercise and water tracking</li></ul><button class="btn s" onclick="A.buy('Monthly',30)">Choose monthly</button></div>
+<div class="plan best"><div class="row sp"><h3>Annual <span class="pill">Save 50%</span></h3><b>$59.99/yr</b></div><p class="m">Just $5.00/mo vs $9.99. You save $59.89 a year.</p><ul><li>Everything in Monthly</li></ul><button class="btn" onclick="A.buy('Annual',365)">Choose annual</button></div>
+${S==='active'?'<button class="btn o" onclick="A.cancel()">Cancel subscription</button>':''}${S==='cancelled'||S==='expired'?'<button class="btn o" onclick="A.restore()">Restore subscription</button>':''}
+<p class="m" style="margin-top:14px">Prototype checkout is simulated. In production, payment is handled by Stripe Checkout and your server updates this status through webhooks. No card data touches the app.</p>
+<button class="link" style="margin-top:10px" onclick="const s=U().sub;s.start-=7*DAY;s.end-=7*DAY;U().seen=[];sv();R()">Demo: fast-forward trial 7 days</button></div>`}
+function sheetV(){const k=ui.sheet;let b='';
+if(k.t==='food')b=`<h2>Add to ${k.m}</h2><div class="tags" style="margin-bottom:10px">${MEALS.map(m=>`<button class="tag ${k.m===m?'on':''}" onclick="ui.sheet.m='${m}';R()">${m}</button>`).join('')}</div><input id="fq" placeholder="Search foods" oninput="A.q()" aria-label="Search foods"><div id="res"></div>
+<h3 style="margin-top:16px">Custom food ${prem()?'':'🔒'}</h3>${prem()?`<div class="row"><input id="c0" placeholder="Name" aria-label="Name"><input id="c1" type="number" placeholder="kcal" aria-label="Calories"></div><div class="row" style="margin-top:8px"><input id="c2" type="number" placeholder="P g" aria-label="Protein"><input id="c3" type="number" placeholder="C g" aria-label="Carbs"><input id="c4" type="number" placeholder="F g" aria-label="Fat"></div><button class="btn s" onclick="A.cust()">Save and add</button>`:'<p class="m">Create your own foods with Premium.</p>'}`;
+if(k.t==='weight')b=`<h2>Log weight</h2>${prem()?'<label for="wv">Weight (kg)</label><input id="wv" type="number" step="0.1"><button class="btn" onclick="A.wt()">Save weigh-in</button>':lockV('Weight tracking')}`;
+if(k.t==='water')b=`<h2>Add water</h2><div class="tags">${[250,500,750].map(m=>`<button class="tag" onclick="A.water(${m})">${m} ml</button>`).join('')}</div><label for="wc">Custom (ml)</label><input id="wc" type="number"><button class="btn" onclick="A.water(+$('#wc').value)">Add</button>`;
+return `<div class="sheet" onclick="if(event.target===this){ui.sheet=null;R()}"><div role="dialog" aria-modal="true">${b}<button class="btn o" onclick="ui.sheet=null;R()">Close</button></div></div>`}
+
+function R(){const a=$('#app');if(!DB.session||!U()){a.innerHTML=authV();return}const u=U();
+if(!u.profile){a.innerHTML=onbV();return}if(!u.welcomed){a.innerHTML=welV();return}st();
+a.innerHTML=(ui.screen==='sub'?subV():`<div class="page">${{home,food,ex,prog,me}[ui.tab]()}</div>${nav()}`)+(ui.sheet?sheetV():'');
+if(ui.sheet&&ui.sheet.t==='food')A.q();if(ui.tab==='ex'&&$('#ee'))A.est();window.scrollTo(0,0)}
+
+const A={
+keep(){const v=[...document.querySelectorAll('#app input,#app select')].map(e=>e.value);R();document.querySelectorAll('#app input,#app select').forEach((e,i)=>e.value=v[i])},
+tab(t){ui.tab=t;ui.screen='';R()},go(t){A.tab(t)},sub(){ui.sheet=null;ui.screen='sub';R()},
+dis(t){U().seen.push(...[14,7,3,1].filter(x=>x>=t));sv();R()},
+add(t,m){ui.sheet={t,m:m||'Breakfast'};R()},
+q(){const q=($('#fq')?.value||'').toLowerCase(),all=[...FOODS,...U().custom];$('#res').innerHTML=all.filter(f=>f[0].toLowerCase().includes(q)).slice(0,8).map(f=>`<div class="it"><div><b>${esc(f[0])}</b><p class="m">${esc(f[1])} · ${f[2]} kcal</p></div><button class="btn sm s" aria-label="Add ${esc(f[0])}" onclick="A.food(${all.indexOf(f)})">+</button></div>`).join('')||'<p class="m">No match. Create a custom food below.</p>'},
+food(i){const f=[...FOODS,...U().custom][i];day(dk(0)).food.push({m:ui.sheet.m,n:f[0],s:f[1],k:f[2],p:f[3],c:f[4],f:f[5]});sv();toast('Added '+f[0]);R()},
+cust(){const g=i=>+$('#c'+i).value||0,n=$('#c0').value.trim();if(!n||!g(1)){toast('Enter a name and calories');return}const f=[n,'1 serving',g(1),g(2),g(3),g(4)];U().custom.push(f);sv();A.food(FOODS.length+U().custom.length-1)},
+del(i){day(dk(0)).food.splice(i,1);sv();R()},
+water(m){if(!(m>0))return;day(dk(0)).water+=m;sv();ui.sheet=null;toast('+'+m+' ml');R()},
+est(){const k=Math.round(EX[$('#et').value]*(+$('#ed').value||0));$('#ee').textContent='Estimated burn: '+k+' kcal'},
+exAdd(){const t=$('#et').value,d=+$('#ed').value;if(!(d>0))return;day(dk(0)).ex.push({t,d,k:Math.round(EX[t]*d)});sv();R()},
+delEx(i){day(dk(0)).ex.splice(i,1);sv();R()},
+wt(){const w=+$('#wv').value;if(!(w>0))return;const a=U().weights,d=dk(0),e=a.find(x=>x.d===d);e?e.w=w:a.push({d,w});sv();ui.sheet=null;toast('Weight saved');R()},
+buy(plan,days){const s=U().sub;s.status='active';s.plan=plan;s.end=Date.now()+days*DAY;sv();toast('Subscribed to '+plan+' (simulated)');R()},
+cancel(){if(confirm('Cancel? You keep Premium until the period ends.')){U().sub.status='cancelled';sv();R()}},
+restore(){const s=U().sub;s.status='active';s.plan=s.plan||'Monthly';if(s.end<Date.now())s.end=Date.now()+30*DAY;sv();toast('Subscription restored');R()},
+out(){DB.session=null;DB.remember=false;sv();ui.auth='login';R()},
+delAcc(){if(confirm('Permanently delete your account and all data?')){delete DB.users[DB.session];A.out()}},
+auth(){const a=ui.auth,E=m=>{$('#err').textContent=m},em=$('#em').value.trim().toLowerCase(),pw=$('#pw').value;
+if(!/^\S+@\S+\.\S+$/.test(em))return E('Enter a valid email address.');
+if(a!=='login'&&!(pw.length>=8&&/[A-Z]/.test(pw)&&/\d/.test(pw)))return E('Password needs 8+ characters, an uppercase letter and a number.');
+if(a==='signup'){const nm=$('#nm').value.trim();if(!nm)return E('Enter your full name.');if(pw!==$('#pw2').value)return E('Passwords do not match.');if(!$('#tm').checked)return E('Please accept the Terms and Privacy Policy.');if(DB.users[em])return E('An account with this email already exists.');
+ const n=Date.now();DB.users[em]={name:nm,pw:hp(pw),log:{},weights:[],custom:[],seen:[],set:{notif:true,priv:false},sub:{status:'trial',plan:null,start:n,end:n+30*DAY}};DB.session=em;DB.remember=true;sv();return R()}
+if(a==='forgot'){if(!DB.users[em])return E('No account found for that email.');DB.users[em].pw=hp(pw);sv();ui.auth='login';R();return toast('Password updated. Please log in.')}
+const u=DB.users[em];if(!u||u.pw!==hp(pw))return E('Incorrect email or password.');DB.session=em;DB.remember=$('#rm').checked;sv();R()},
+onb(){const g=i=>+$('#o'+i).value,E=m=>$('#err').textContent=m;if(!(g(1)>=18&&g(3)>0&&g(4)>0&&g(5)>0))return E('Fill in every field. You must be 18 or older.');
+const p={age:g(1),sex:$('#o2').value,h:g(3),w:g(4),tw:g(5),act:g(6),goal:ui.onb.goal},u=U();u.profile=p;u.weights=[{d:dk(0),w:p.w}];
+for(let i=6;i>=1;i--){const L=day(dk(-i)),pick=[3,4,6,8,9,10].sort(()=>Math.random()-.5).slice(0,4);pick.forEach((x,j)=>{const f=FOODS[x];L.food.push({m:MEALS[j],n:f[0],s:f[1],k:f[2],p:f[3],c:f[4],f:f[5]})});L.water=1000+Math.round(Math.random()*12)*100;if(i%2)L.ex.push({t:'Walking',d:30,k:120});u.weights.unshift({d:dk(-i),w:+(p.w+i*.15).toFixed(1)})}
+sv();R()}};
+R();
+</script></body></html>
